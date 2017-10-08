@@ -80,22 +80,35 @@ loopEndCheck = 0
 methodStart = 0
 methodIncrease = 1
 methodEnd = 1
+loopCount = 0
 
 while loopEndCheck == 0:
+    loopCount = loopCount + 1
     print miArray
     arrayLength = len(miArray)
+    for looper in range(methodStart, methodEnd):
+        if miArray[looper] == target:
+            loopEndCheck = 1
+            lastDigit = int(str(loopCount)[-1])
+            if loopCount == 11 or loopCount == 12:
+                print "Successfully found the target string on the " + str(loopCount) + "th line of the tree!"
+            elif lastDigit == 1:
+                print "Successfully found the target string on the " + str(loopCount) + "st line of the tree!"
+            elif lastDigit == 2:
+                print "Successfully found the target string on the " + str(loopCount) + "nd line of the tree!"
+            elif lastDigit == 3:
+                print "Successfully found the target string on the " + str(loopCount) + "rd line of the tree!"
+            else:
+                print "Successfully found the target string on the " + str(loopCount) + "th line of the tree!"
+    numberOfTries = len(miArray)
+    if numberOfTries >= maxTries:
+        if loopEndCheck == 0:
+            loopEndCheck = 1
+            print "I gave up!"
     rule1(miArray, methodStart, methodEnd)
     rule2(miArray, methodStart, methodEnd)
     rule3(miArray, methodStart, methodEnd)
     rule4(miArray, methodStart, methodEnd)
-    for looper in range(methodStart, methodEnd):
-        if miArray[looper] == target:
-            loopEndCheck = 1
-            print "Successfully Found!"
-    numberOfTries = len(miArray)
-    if numberOfTries >= maxTries:
-        loopEndCheck = 1
-        print "I gave up!"
     methodStart = methodStart + methodIncrease
     methodIncrease = (len(miArray) - arrayLength)
     methodEnd = methodEnd + methodIncrease
